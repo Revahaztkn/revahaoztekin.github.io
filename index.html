@@ -158,11 +158,16 @@
     margin: 0.4rem 0 0.3rem;
     letter-spacing: -0.02em;
   }
-  .whoami-role {
-    color: var(--accent);
+
+  .whoami-about {
+    color: var(--text);
     font-size: 13px;
+    line-height: 1.8;
+    max-width: 600px;
     margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
+    padding: 14px 16px;
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
   }
 
   .info-grid {
@@ -181,17 +186,49 @@
   /* Certs */
   .cert-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
-  .cert-badge {
-    background: #0a1a0f;
-    border: 1px solid #1a4d2e;
+  .cert-list::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    min-width: 240px;
+    max-width: 240px;
+    flex: 0 0 240px;
+    scroll-snap-align: center;
+  }
+  .cert-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .cert-num {
     color: var(--accent);
-    padding: 4px 12px;
-    font-size: 12px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
     font-weight: 600;
+    min-width: 22px;
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .cert-title {
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.5;
   }
 
   /* Tool cards */
@@ -235,67 +272,50 @@
   }
   .tool-card,
   .video-item {
-    min-width: 180px;
-    flex: 0 0 180px;
+    min-width: 220px;
+    flex: 0 0 220px;
   }
   .video-item {
     min-width: 220px;
   }
 
   .tool-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 16px;
+    padding: 12px;
+    text-decoration: none;
     transition: border-color 0.2s ease, transform 0.2s ease;
-    cursor: pointer;
     scroll-snap-align: center;
   }
   .tool-card:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
   }
-  .tool-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-  .tool-icon {
-    width: 32px; height: 32px;
-    background: #0a1a0f;
-    border: 1px solid #1a4d2e;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
+  .tool-num {
     color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 22px;
+    padding-top: 2px;
+    letter-spacing: 0.05em;
     flex-shrink: 0;
   }
   .tool-name {
     color: var(--bright);
     font-weight: 600;
     font-size: 13px;
+    flex: 1;
   }
-  .tool-tag {
-    font-size: 11px;
-    color: var(--dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .tool-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    padding-top: 2px;
+    transition: color 0.2s, transform 0.2s;
   }
-  .tool-desc {
-    font-size: 12px;
-    color: var(--dim);
-    line-height: 1.6;
-    margin-bottom: 10px;
-  }
-  .tool-link {
-    font-size: 12px;
-    color: var(--accent2);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .tool-link:hover { color: var(--accent); }
-  .tool-link::after { content: '→'; }
+  .tool-card:hover .tool-arrow { color: var(--accent); transform: translateX(3px); }
 
   /* Video section */
   .video-list {
@@ -337,117 +357,6 @@
     letter-spacing: 0.05em;
   }
 
-  .cert-carousel {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0;
-    scrollbar-width: none;
-  }
-  .cert-carousel::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-  }
-  .cert-card {
-    flex: 0 0 calc(33.333% - 11px);
-    min-width: calc(33.333% - 11px);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-    transition: transform 0.25s ease, border-color 0.25s ease;
-  }
-  .cert-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-  }
-  .cert-card-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    cursor: pointer;
-  }
-  .cert-card-body {
-    padding: 14px 16px 18px;
-  }
-  .cert-card-title {
-    color: var(--bright);
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .cert-card-link {
-    display: inline-block;
-    font-size: 12px;
-    color: var(--accent2);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-  }
-  .cert-card-link:hover {
-    color: var(--accent);
-  }
-  .cert-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 120;
-  }
-  .cert-modal.open {
-    display: flex;
-  }
-  .cert-modal-content {
-    position: relative;
-    max-width: 800px;
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
-  }
-  .modal-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    border: none;
-    background: rgba(255,255,255,0.08);
-    color: var(--text);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
-  }
-  .cert-modal-content img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .modal-link {
-    display: block;
-    padding: 16px 18px;
-    color: var(--accent2);
-    text-decoration: none;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    border-top: 1px solid var(--border);
-  }
-  .modal-link:hover {
-    color: var(--accent);
-  }
   .view-all-btn {
     border: 1px solid var(--border);
     background: var(--surface);
@@ -458,6 +367,8 @@
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.05em;
+    text-decoration: none;
+    display: inline-block;
     transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
   }
   .view-all-btn:hover {
@@ -466,70 +377,10 @@
     color: #000000;
     transform: translateY(-1px);
   }
-  .cert-list-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 110;
-  }
-  .cert-list-modal.open {
-    display: flex;
-  }
-  .cert-list-modal-content {
-    position: relative;
-    max-width: 600px;
-    width: 100%;
-    max-height: 70vh;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
-    display: flex;
-    flex-direction: column;
-  }
-  .cert-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .cert-list-header h2 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--bright);
-  }
-  .cert-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-    flex: 1;
-  }
-  .cert-list li {
-    padding: 0;
-  }
-  .cert-list a {
-    display: block;
-    padding: 12px 20px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .cert-list a:last-child {
-    border-bottom: none;
-  }
-  .cert-list a:hover {
-    background: rgba(var(--accent-rgb), 0.08);
-    color: var(--accent2);
+  .cert-total {
+    color: var(--dim);
+    font-size: 12px;
+    letter-spacing: 0.03em;
   }
   .video-scroll {
     display: flex;
@@ -682,7 +533,7 @@
   <div class="section">
     <div class="section-title">./kimim-ben</div>
     <div class="whoami-name">Revaha Öztekin<span class="cursor"></span></div>
-    <div class="whoami-role">uygulama güvenliği araştırmacısı &amp; bug avcısı</div>
+    <div class="whoami-about">Siber güvenlik üzerinde çalışmak ve yeni şeyler öğrenmek benim için gerçek bir tutkuya dönüştü — sistemlerin nasıl kırılabileceğini anlamak, aynı zamanda onları nasıl daha güvenli hale getirebileceğimi öğrenmek beni her gün biraz daha ileri taşıyor. Bununla birlikte yazılım tarafında da kendimi sürekli geliştiriyorum; her yeni proje fikir, her satır kod benim için bir keşif alanı oluyor. Amacım hem güvenliği arttırmak hem geliştirme tarafında derinleşip, öğrendiğim her şeyi paylaşarak bu alanda değer katan biri olmak.</div>
     <div class="info-grid">
       <span class="key">Linkedin</span>   <span><a href="https://www.linkedin.com/in/revaztkn/" target="_blank" rel="noopener noreferrer">revaztkn</a></span>
       <span class="key">GitHub</span>  <span><a href="https://github.com/Revahaztkn?tab=stars" target="_blank" rel="noopener noreferrer">Revahaztkn</a></span>
@@ -699,30 +550,13 @@
   <div class="section">
     <div class="section-title">./sertifikalar</div>
     <div class="scroll-controls">
-      <a href="https://www.linkedin.com/in/revaztkn/details/certifications/" target="_blank" rel="noopener noreferrer" class="view-all-btn">[ HEPSİNİ GÖRÜNTÜLE ]</a>
+      <a href="https://www.linkedin.com/in/revaztkn/details/certifications/" target="_blank" rel="noopener noreferrer" class="view-all-btn" id="view-all-certs-btn">[ HEPSİNİ GÖRÜNTÜLE ]</a>
+      <span class="cert-total" id="cert-total-count"></span>
       <div style="flex: 1;"></div>
       <button class="scroll-button" data-target="cert-scroll" data-dir="left">←</button>
       <button class="scroll-button" data-target="cert-scroll" data-dir="right">→</button>
     </div>
-    <div class="cert-carousel" id="cert-scroll"></div>
-  </div>
-
-  <div class="cert-modal" id="cert-modal" aria-hidden="true">
-    <div class="cert-modal-content">
-      <button class="modal-close" id="cert-modal-close">×</button>
-      <img id="cert-modal-image" src="" alt="" />
-      <a id="cert-modal-link" class="modal-link" href="#" target="_blank" rel="noopener">Open certificate</a>
-    </div>
-  </div>
-
-  <div class="cert-list-modal" id="cert-list-modal" aria-hidden="true">
-    <div class="cert-list-modal-content">
-      <div class="cert-list-header">
-        <h2>./sertifikalar</h2>
-        <button class="modal-close" id="cert-list-close">×</button>
-      </div>
-      <ul class="cert-list" id="cert-list"></ul>
-    </div>
+    <div class="cert-list" id="cert-scroll"></div>
   </div>
 
   <!-- TOOLS -->
@@ -733,78 +567,41 @@
       <button class="scroll-button" data-target="tools-scroll" data-dir="right">→</button>
     </div>
     <div class="tools-scroll" id="tools-scroll">
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[01]</div>
-          <div>
-            <div class="tool-name">IT-ToolBox</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/IT-ToolBox" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[02]</div>
-          <div>
-            <div class="tool-name">Securify</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Securify" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[03]</div>
-          <div>
-            <div class="tool-name">Windows-Temizleme-Clean-BAT</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Windows-Temizleme-Clean-BAT" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[04]</div>
-          <div>
-            <div class="tool-name">Real-Time-Eye-Tracking-System</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Real-Time-Eye-Tracking-System" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[05]</div>
-          <div>
-            <div class="tool-name">Azure-Depo-Yonetim-Sistemi</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Azure-Depo-Yonetim-Sistemi" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[06]</div>
-          <div>
-            <div class="tool-name">Windows-Update</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Windows-Update" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[07]</div>
-          <div>
-            <div class="tool-name">Windows-Temizleme-Clean-BAT</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Windows-Temizleme-Clean-BAT" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[08]</div>
-          <div>
-            <div class="tool-name">Card-System-with-PHP</div>
-          </div>
-        </div>
-        <a class="tool-link" href="https://github.com/Revahaztkn/Card-System-with-PHP" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </div>
+      <a class="tool-card" href="https://github.com/Revahaztkn/IT-ToolBox" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">01</span>
+        <div class="tool-name">IT-ToolBox</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Securify" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">02</span>
+        <div class="tool-name">Securify</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Windows-Temizleme-Clean-BAT" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">03</span>
+        <div class="tool-name">Windows-Temizleme-Clean-BAT</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Real-Time-Eye-Tracking-System" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">04</span>
+        <div class="tool-name">Real-Time-Eye-Tracking-System</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Azure-Depo-Yonetim-Sistemi" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">05</span>
+        <div class="tool-name">Azure-Depo-Yonetim-Sistemi</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Windows-Update" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">06</span>
+        <div class="tool-name">Windows-Update</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://github.com/Revahaztkn/Card-System-with-PHP" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">07</span>
+        <div class="tool-name">Card-System-with-PHP</div>
+        <span class="tool-arrow">→</span>
+      </a>
     </div>
   </div>
 
@@ -816,21 +613,21 @@
       <button class="scroll-button" data-target="video-scroll" data-dir="right">→</button>
     </div>
     <div class="video-list" id="video-scroll">
-      <a class="video-item" href="https://www.youtube.com/@rewaha" target="_blank" rel="noopener noreferrer">
+      <a class="video-item" href="https://youtu.be/OqEx7Ho06BY" target="_blank" rel="noopener noreferrer">
         <span class="video-num">01</span>
         <div class="video-info">
           <div class="video-title">IT-ToolBox</div>
         </div>
         <span class="video-arrow">→</span>
       </a>
-      <a class="video-item" href="https://www.youtube.com/@rewaha" target="_blank" rel="noopener noreferrer">
+      <a class="video-item" href="https://youtu.be/7HpNrPiDmGE" target="_blank" rel="noopener noreferrer">
         <span class="video-num">02</span>
         <div class="video-info">
           <div class="video-title">Securify</div>
         </div>
         <span class="video-arrow">→</span>
       </a>
-      <a class="video-item" href="https://www.youtube.com/@rewaha" target="_blank" rel="noopener noreferrer">
+      <a class="video-item" href="https://youtu.be/1CggLS3gVt0" target="_blank" rel="noopener noreferrer">
         <span class="video-num">03</span>
         <div class="video-info">
           <div class="video-title">Windows-Update</div>
@@ -844,7 +641,7 @@
         </div>
         <span class="video-arrow">→</span>
       </a>
-      <a class="video-item" href="https://www.youtube.com/@rewaha" target="_blank" rel="noopener noreferrer">
+      <a class="video-item" href="https://youtu.be/aubsdWb-jfs" target="_blank" rel="noopener noreferrer">
         <span class="video-num">05</span>
         <div class="video-info">
           <div class="video-title">ESP 8266 Wifi Kart Tanıtım</div>
@@ -872,97 +669,64 @@
         </div>
         <span class="video-arrow">→</span>
       </a>
+      <a class="video-item" href="https://www.youtube.com/watch?v=ztqN5zVgFjQ&t=14s" target="_blank" rel="noopener noreferrer">
+        <span class="video-num">09</span>
+        <div class="video-info">
+          <div class="video-title">Deauth Attack</div>
+        </div>
+        <span class="video-arrow">→</span>
+      </a>
     </div>
   </div>
 
   <!-- MEDIUM ARTICLES -->
   <div class="section">
-    <div class="section-title">./medium-yazılarım</div>
+    <div class="section-title">./yazılarım</div>
     <div class="scroll-controls">
       <button class="scroll-button" data-target="medium-scroll" data-dir="left">←</button>
       <button class="scroll-button" data-target="medium-scroll" data-dir="right">→</button>
     </div>
     <div class="tools-scroll" id="medium-scroll">
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[01]</div>
-          <div>
-            <div class="tool-name">Metasploit ile Kali Linux Üzerinde Sızma Testi</div>
-          </div>
-        </div>
-        <p class="tool-desc">Adım Adım Uygulamalı Rehber</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[02]</div>
-          <div>
-            <div class="tool-name">Burp Suite Nedir Nasıl Kullanılır</div>
-          </div>
-        </div>
-        <p class="tool-desc">Web Güvenliği Testleri</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[03]</div>
-          <div>
-            <div class="tool-name">Kali Linux'ta Nmap ile Ağ Tarama ve Keşif</div>
-          </div>
-        </div>
-        <p class="tool-desc">Adım Adım Komutlar ve Pratik Analiz</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[04]</div>
-          <div>
-            <div class="tool-name">Otonom Yapay Zeka Ajanları ve Zararlı Yazılımlar</div>
-          </div>
-        </div>
-        <p class="tool-desc">Siber Savaşta 'Makine Hızı' Dönemi</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[05]</div>
-          <div>
-            <div class="tool-name">Burp Suite ile Web Sızma Testleri</div>
-          </div>
-        </div>
-        <p class="tool-desc">Adım Adım Bağlantıyla İleri Seviye Rehber</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[06]</div>
-          <div>
-            <div class="tool-name">Fidye Yazılımları (Ransomware) ve Çift Yönlü Santaç</div>
-          </div>
-        </div>
-        <p class="tool-desc">Veririniz Size Karşı Nasıl Silaha...</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[07]</div>
-          <div>
-            <div class="tool-name">Oltalsama (Phishing) ve Sosyal Mühendislik</div>
-          </div>
-        </div>
-        <p class="tool-desc">İnsan Zihninini Hedef Alan Siber Tehditler</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <div class="tool-icon">[08]</div>
-          <div>
-            <div class="tool-name">Wireshark ile Ağ Trafiği Analizi</div>
-          </div>
-        </div>
-        <p class="tool-desc">Kali Linux Üzerinde Ağ Trafiği Nasıl Analiz Edilir?</p>
-        <a class="tool-link" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">Medium'da Oku</a>
-      </div>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">01</span>
+        <div class="tool-name">Metasploit ile Kali Linux Üzerinde Sızma Testi</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">02</span>
+        <div class="tool-name">Burp Suite Nedir Nasıl Kullanılır</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">03</span>
+        <div class="tool-name">Kali Linux'ta Nmap ile Ağ Tarama ve Keşif</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">04</span>
+        <div class="tool-name">Otonom Yapay Zeka Ajanları ve Zararlı Yazılımlar</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">05</span>
+        <div class="tool-name">Burp Suite ile Web Sızma Testleri</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">06</span>
+        <div class="tool-name">Fidye Yazılımları (Ransomware) ve Çift Yönlü Şantaj</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">07</span>
+        <div class="tool-name">Oltalama (Phishing) ve Sosyal Mühendislik</div>
+        <span class="tool-arrow">→</span>
+      </a>
+      <a class="tool-card" href="https://medium.com/@revahaoztekin" target="_blank" rel="noopener noreferrer">
+        <span class="tool-num">08</span>
+        <div class="tool-name">Wireshark ile Ağ Trafiği Analizi</div>
+        <span class="tool-arrow">→</span>
+      </a>
     </div>
   </div>
 
@@ -972,7 +736,7 @@
     <div class="cv-block">
       <div class="cv-info">
         <div class="cv-title" id="cv-main-title">Özgeçmiş</div>
-        <div class="cv-sub" id="cv-main-sub">Son güncelleme: 2025 · PDF formatı</div>
+        <div class="cv-sub" id="cv-main-sub">Son güncelleme: Temmuz 2026 · PDF formatı</div>
       </div>
       <div style="display:flex; gap:10px; align-items:center; flex-wrap: wrap;">
         <a href="https://canva.link/2hr84zfq1qmkcb1" target="_blank" rel="noopener noreferrer" class="cv-btn" id="download-btn">[ İNDİR ]</a>
@@ -988,7 +752,10 @@
         <div class="cv-title" id="contact-title">Bana nasıl ulaşabilirsin</div>
         <div class="cv-sub" id="contact-sub">E-posta: revahaoztekin@gmail.com</div>
       </div>
-      <button class="cv-btn" id="copy-email">[ E-POSTA KOPYALA ]</button>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap: wrap;">
+        <button class="cv-btn" id="copy-email">[ E-POSTA KOPYALA ]</button>
+        <a href="mailto:revahaoztekin@gmail.com" class="cv-btn" id="send-email">[ BANA MAİL GÖNDER ]</a>
+      </div>
     </div>
   </div>
 
@@ -1004,7 +771,7 @@
   const langToggle = document.getElementById('lang-toggle');
   const copyEmail = document.getElementById('copy-email');
   const sectionTitles = document.querySelectorAll('.section-title');
-  const whoamiRole = document.querySelector('.whoami-role');
+  const whoamiAbout = document.querySelector('.whoami-about');
   const cvMainTitle = document.getElementById('cv-main-title');
   const cvMainSub = document.getElementById('cv-main-sub');
   const downloadBtn = document.getElementById('download-btn');
@@ -1013,29 +780,11 @@
   const contactSub = document.getElementById('contact-sub');
   const copyBtn = document.getElementById('copy-email');
   const certCarousel = document.getElementById('cert-scroll');
-  const certModal = document.getElementById('cert-modal');
-  const modalImage = document.getElementById('cert-modal-image');
-  const modalLink = document.getElementById('cert-modal-link');
-  const modalClose = document.getElementById('cert-modal-close');
-  const certListModal = document.getElementById('cert-list-modal');
-  const certListClose = document.getElementById('cert-list-close');
-  const certList = document.getElementById('cert-list');
+  const certTotalCount = document.getElementById('cert-total-count');
+  const viewAllCertsBtn = document.getElementById('view-all-certs-btn');
 
   const CERT_LINK_DEFAULT = 'https://www.linkedin.com/in/revaztkn/details/certifications/';
   let currentLang = 'tr';
-
-  function certPlaceholder(title) {
-    const short = title.split('—')[0].trim().slice(0, 48);
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420"><rect width="720" height="420" fill="#0d1117"/><rect x="20" y="20" width="680" height="380" rx="12" fill="#131313" stroke="#1a4d2e" stroke-width="2"/><text x="360" y="210" fill="#00ff88" font-family="monospace" font-size="20" text-anchor="middle">${short.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')}</text></svg>`;
-    return 'data:image/svg+xml,' + encodeURIComponent(svg);
-  }
-
-  function resolveCertImage(cert) {
-    if (cert.image && !cert.image.includes('via.placeholder.com')) {
-      return cert.image;
-    }
-    return certPlaceholder(cert.title);
-  }
 
   function resolveCertLink(link) {
     return (!link || link === '#') ? CERT_LINK_DEFAULT : link;
@@ -1112,10 +861,12 @@
   const translations = {
     tr: {
       topLang: 'EN',
-      titles: ['./kimim-ben', './sertifikalar', './araçlar', './videolar', './medium-yazılarım', './cv', './iletişim'],
-      whoamiRole: 'uygulama güvenliği araştırmacısı & bug avcısı',
+      titles: ['./kimim-ben', './sertifikalar', './araçlar', './videolar', './yazılarım', './cv', './iletişim'],
+      whoamiAbout: 'Siber güvenlik üzerinde çalışmak ve yeni şeyler öğrenmek benim için gerçek bir tutkuya dönüştü — sistemlerin nasıl kırılabileceğini anlamak, aynı zamanda onları nasıl daha güvenli hale getirebileceğimi öğrenmek beni her gün biraz daha ileri taşıyor. Bununla birlikte yazılım tarafında da kendimi sürekli geliştiriyorum; her yeni proje fikir, her satır kod benim için bir keşif alanı oluyor. Amacım hem güvenliği arttırmak hem geliştirme tarafında derinleşip, öğrendiğim her şeyi paylaşarak bu alanda değer katan biri olmak.',
       cvMainTitle: 'Özgeçmiş',
-      cvMainSub: 'Son güncelleme: 2025 · PDF formatı',
+      cvMainSub: 'Son güncelleme: Temmuz 2026 · PDF formatı',
+      certTotalLabel: (n) => `Toplam ${n} sertifika`,
+      viewAllBtn: '[ HEPSİNİ GÖRÜNTÜLE ]',
       downloadBtn: '[ İNDİR ]',
       viewBtn: '[ GÖRÜNTÜLE ]',
       contactTitle: 'Bana nasıl ulaşabilirsin',
@@ -1124,10 +875,12 @@
     },
     en: {
       topLang: 'TR',
-      titles: ['./whoami', './certifications', './tools', './videos', './medium-articles', './cv', './contact'],
-      whoamiRole: 'application security researcher & bug hunter',
+      titles: ['./whoami', './certifications', './tools', './videos', './articles', './cv', './contact'],
+      whoamiAbout: 'Working in cybersecurity and constantly learning new things has become a real passion of mine — understanding how systems can break, and learning how to make them more secure, pushes me a little further every day. Alongside that, I keep developing myself on the software side too; every new project idea, every line of code becomes a space to explore. My goal is to strengthen security while also growing deeper on the development side, sharing everything I learn and becoming someone who adds real value to this field.',
       cvMainTitle: 'Resume',
-      cvMainSub: 'Updated: 2025 · PDF format',
+      cvMainSub: 'Updated: July 2026 · PDF format',
+      certTotalLabel: (n) => `${n} certificates total`,
+      viewAllBtn: '[ VIEW ALL ]',
       downloadBtn: '[ DOWNLOAD ]',
       viewBtn: '[ VIEW ]',
       contactTitle: 'How to reach me',
@@ -1136,92 +889,33 @@
     }
   };
 
-  function renderCertificationsList() {
-    if (!certList) return;
-    certList.innerHTML = '';
-    certifications.forEach((cert) => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = resolveCertLink(cert.link);
-      a.textContent = cert.title;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      li.appendChild(a);
-      certList.appendChild(li);
-    });
-  }
-
-  function openCertListModal() {
-    if (!certListModal) return;
-    renderCertificationsList();
-    certListModal.classList.add('open');
-    certListModal.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeCertListModal() {
-    if (!certListModal) return;
-    certListModal.classList.remove('open');
-    certListModal.setAttribute('aria-hidden', 'true');
-  }
-
   function renderCertifications() {
     if (!certCarousel) return;
     certCarousel.innerHTML = '';
     certCarousel.scrollLeft = 0;
-    const linkLabel = currentLang === 'tr' ? 'Sertifikayı aç' : 'Open certificate';
-    certifications.forEach((cert) => {
-      const item = document.createElement('article');
-      item.className = 'cert-card';
+    certifications.forEach((cert, idx) => {
+      const a = document.createElement('a');
+      a.className = 'cert-item';
+      a.href = resolveCertLink(cert.link);
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
 
-      const img = document.createElement('img');
-      img.className = 'cert-card-image';
-      img.src = resolveCertImage(cert);
-      img.alt = cert.title;
-      img.addEventListener('error', () => {
-        img.src = certPlaceholder(cert.title);
-      });
-      img.addEventListener('click', () => openCertModal(cert));
-
-      const body = document.createElement('div');
-      body.className = 'cert-card-body';
+      const num = document.createElement('span');
+      num.className = 'cert-num';
+      num.textContent = String(idx + 1).padStart(2, '0');
 
       const title = document.createElement('div');
-      title.className = 'cert-card-title';
+      title.className = 'cert-title';
       title.textContent = cert.title;
 
-      const link = document.createElement('a');
-      link.className = 'cert-card-link';
-      link.href = resolveCertLink(cert.link);
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = linkLabel;
-
-      body.appendChild(title);
-      body.appendChild(link);
-      item.appendChild(img);
-      item.appendChild(body);
-      certCarousel.appendChild(item);
+      a.appendChild(num);
+      a.appendChild(title);
+      certCarousel.appendChild(a);
     });
-  }
-
-  function openCertModal(cert) {
-    if (!certModal) return;
-    modalImage.onerror = () => {
-      modalImage.onerror = null;
-      modalImage.src = certPlaceholder(cert.title);
-    };
-    modalImage.src = resolveCertImage(cert);
-    modalImage.alt = cert.title;
-    modalLink.href = resolveCertLink(cert.link);
-    modalLink.textContent = currentLang === 'tr' ? 'Sertifikayı LinkedIn\'de görüntüle' : 'View certificate on LinkedIn';
-    certModal.classList.add('open');
-    certModal.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeCertModal() {
-    if (!certModal) return;
-    certModal.classList.remove('open');
-    certModal.setAttribute('aria-hidden', 'true');
+    if (certTotalCount) {
+      const label = translations[currentLang]?.certTotalLabel;
+      certTotalCount.textContent = label ? label(certifications.length) : String(certifications.length);
+    }
   }
 
   function applyLanguage(lang) {
@@ -1229,7 +923,7 @@
     if (!data) return;
     currentLang = lang;
     sectionTitles.forEach((el, idx) => { el.textContent = data.titles[idx] || el.textContent; });
-    if (whoamiRole) whoamiRole.textContent = data.whoamiRole;
+    if (whoamiAbout) whoamiAbout.textContent = data.whoamiAbout;
     if (cvMainTitle) cvMainTitle.textContent = data.cvMainTitle;
     if (cvMainSub) cvMainSub.textContent = data.cvMainSub;
     if (downloadBtn) downloadBtn.textContent = data.downloadBtn;
@@ -1237,6 +931,7 @@
     if (contactTitle) contactTitle.textContent = data.contactTitle;
     if (contactSub) contactSub.textContent = data.contactSub;
     if (copyBtn) copyBtn.textContent = data.copyBtn;
+    if (viewAllCertsBtn) viewAllCertsBtn.textContent = data.viewAllBtn;
     if (langToggle) langToggle.textContent = data.topLang;
     document.documentElement.lang = lang;
     try { localStorage.setItem('site-lang', lang); } catch (e) {}
@@ -1288,35 +983,6 @@
     });
   }
 
-  if (certListClose) {
-    certListClose.addEventListener('click', closeCertListModal);
-  }
-  if (certListModal) {
-    certListModal.addEventListener('click', (event) => {
-      if (event.target === certListModal) {
-        closeCertListModal();
-      }
-    });
-  }
-
-  if (modalClose) {
-    modalClose.addEventListener('click', closeCertModal);
-  }
-  if (certModal) {
-    certModal.addEventListener('click', (event) => {
-      if (event.target === certModal) {
-        closeCertModal();
-      }
-    });
-  }
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeCertModal();
-      closeCertListModal();
-    }
-  });
-
   try {
     applyTheme(localStorage.getItem('site-theme') === 'light');
     applyLanguage(localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr');
@@ -1331,20 +997,12 @@
       const target = document.getElementById(targetId);
       if (!target) return;
 
-      const card = target.querySelector('.cert-card, .tool-card, .video-item');
+      const card = target.querySelector('.cert-item, .tool-card, .video-item');
       const scrollAmount = card ? card.offsetWidth + 12 : 300;
       target.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     });
   });
 
-  document.querySelectorAll('.tool-card').forEach(card => {
-    const link = card.querySelector('.tool-link');
-    if (!link) return;
-    card.addEventListener('click', (event) => {
-      if (event.target.closest('a')) return;
-      link.click();
-    });
-  });
 </script>
 
 </body>
